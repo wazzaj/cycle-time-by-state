@@ -494,7 +494,7 @@ Ext.define('CustomApp', {
 
         var configs = _.map( oidsArrays, function(oArray) {
             return {
-                fetch : ['FormattedID','_UnformattedID','ObjectID','_TypeHierarchy','PlanEstimate', 'ScheduleState',app.kanbanField],
+                fetch : ['FormattedID','_UnformattedID','ObjectID','_TypeHierarchy','PlanEstimate', 'ScheduleState', 'c_StoryType', app.kanbanField],
                 hydrate : ['_TypeHierarchy','ScheduleState',app.kanbanField],
                 find : {
                     // '_TypeHierarchy' : { "$in" : ["HierarchicalRequirement","Defect"]} ,
