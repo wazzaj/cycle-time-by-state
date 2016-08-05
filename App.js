@@ -53,8 +53,9 @@ Ext.define('CustomApp', {
         stateField : "",
         finalValue : "",
         timeInHours : false,
-        months : 6
-
+        months : 6,
+        queryField : "",
+        queryValue : ""
         }
     },
 
@@ -85,6 +86,16 @@ Ext.define('CustomApp', {
                 name: 'months',
                 xtype: 'rallytextfield',
                 label: 'Number of months to consider'
+            },            
+            {
+                name: 'queryField',
+                xtype: 'rallytextfield',
+                label: 'Additional field to filter results on'
+            },            
+            {
+                name: 'queryValue',
+                xtype: 'rallytextfield',
+                label: 'Value of additional field used to filter results on'
             }
 
         ];
