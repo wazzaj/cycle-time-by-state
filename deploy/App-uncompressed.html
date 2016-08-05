@@ -281,6 +281,7 @@ Ext.define('CustomApp', {
             s.set("CompletedDate",ci.get("_ValidFrom"));
             s.set("Month",month);
             s.set("Size",ci.get("PlanEstimate"));
+            s.set("Type",ci.get("c_StoryType"));  // Warren 
         });
 
         callback( null, completedItems, snapshots );
