@@ -253,6 +253,7 @@ Ext.define('CustomApp', {
         };
 
         var snapshotStore = Ext.create('Rally.data.lookback.SnapshotStore', storeConfig);
+        console.log(storeConfig);
         
     },
 
