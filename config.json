@@ -13,6 +13,7 @@
       "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
    ],
    "css": [
-      "app.css"
+      "app.css",
+      "lib/pivot.css"
    ]
 }
