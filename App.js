@@ -16,14 +16,15 @@ Ext.define('CustomApp', {
         // this.startDate = moment().subtract('month',6).toISOString();
         this.startDate = moment().subtract('month',app.getSetting("months")).toISOString();
 
-        if ((app.getSetting("type") === "") &&
-            (app.getSetting("stateField") === "") &&
-            (app.getSetting("finalValue") === "")) {
+        if ((app.getSetting("stateField") === "") &&
+            (app.getSetting("finalValue") === "") &&
+            (app.getSetting("storyType") === "")) {
             this.createUI();
         } else {
             app.type = app.getSetting("type");
             app.kanbanField = app.getSetting("stateField");
             app.finalValue  = app.getSetting("finalValue");
+            app.storyType = app.getSetting("storyType");
         }
 
         var panel = Ext.create('Ext.container.Container', {
