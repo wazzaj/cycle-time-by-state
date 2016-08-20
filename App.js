@@ -49,24 +49,17 @@ Ext.define('CustomApp', {
 
     defaultSettings : {
 
-        type : "",
+        type : "STORY",
         stateField : "",
         finalValue : "",
         timeInHours : false,
         months : 6,
-        queryField : "",
-        queryValue : ""
+        storyType : ""
         }
     },
 
     getSettingsFields: function() {
         var values = [
-            {
-                name: 'type',
-                xtype: 'rallytextfield',
-                label : "Comma delimited list of types eg. Story,Defect or PortfolioItem/Feature"
-            },
-
             {
                 name: 'stateField',
                 xtype: 'rallytextfield',
@@ -88,14 +81,9 @@ Ext.define('CustomApp', {
                 label: 'Number of months to consider'
             },            
             {
-                name: 'queryField',
+                name: 'storyType',
                 xtype: 'rallytextfield',
-                label: 'Additional field to filter results on'
-            },            
-            {
-                name: 'queryValue',
-                xtype: 'rallytextfield',
-                label: 'Value of additional field used to filter results on'
+                label: 'Comma delimited list of story types to include'
             }
 
         ];
@@ -232,7 +220,7 @@ Ext.define('CustomApp', {
         find[app.kanbanField] =  app.finalValue;
         find["_PreviousValues."+app.kanbanField] =  {"$ne" : null };
         find["_ValidFrom"] = { "$gte" : app.startDate };
-        find[app.queryField] = app.queryValue;
+        find["c_StoryType"] = { "$in" : app.storyType };
 
         var storeConfig = {
             find : find,
