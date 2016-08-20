@@ -235,7 +235,7 @@ Ext.define('CustomApp', {
         find[app.kanbanField] =  app.finalValue;
         find["_PreviousValues."+app.kanbanField] =  {"$ne" : null };
         find["_ValidFrom"] = { "$gte" : app.startDate };
-        find["c_StoryType"] = { "$in" : app.storyType };
+        find["c_StoryType"] = { "$in" : [app.storyType] };
         console.log(app.storyType);
 
         var storeConfig = {
