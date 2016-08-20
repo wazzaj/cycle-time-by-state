@@ -197,6 +197,13 @@ Ext.define('CustomApp', {
         return types;
     },
     
+    getStoryTypes : function() {
+
+        var storyTypes = _.map( app.storyType.split(","));
+        console.log("Story types:",storyTypes);
+        return storyTypes;
+    },
+
     // reads the snapshots for items that have been completed since the specified start date.
     getCompletedItems : function( callback ) {
         
@@ -221,8 +228,7 @@ Ext.define('CustomApp', {
         find[app.kanbanField] =  app.finalValue;
         find["_PreviousValues."+app.kanbanField] =  {"$ne" : null };
         find["_ValidFrom"] = { "$gte" : app.startDate };
-        find["c_StoryType"] = { "$in" : [app.storyType] };
-        console.log(app.storyType);
+        find["c_StoryType"] = { "$in" : [app.getStoryTypes()] };
 
         var storeConfig = {
             find : find,
