@@ -475,21 +475,35 @@ Ext.define('CustomApp', {
         }
         console.log("oidsArrays",oidsArrays);
 
-        var configs = _.map( oidsArrays, function(oArray) {
-            return {
-                fetch : ['FormattedID','_UnformattedID','ObjectID','_TypeHierarchy','PlanEstimate', 'ScheduleState', 'c_StoryType', app.kanbanField],
-                hydrate : ['_TypeHierarchy','ScheduleState',app.kanbanField],
-                find : {
-                    // '_TypeHierarchy' : { "$in" : ["HierarchicalRequirement","Defect"]} ,
-                    '_TypeHierarchy' : { "$in" : app.getTypes() } ,
-                    '_ProjectHierarchy' : { "$in": [app.getContext().getProject().ObjectID] }, 
-                    'ObjectID' : { "$in" : oArray },
-                    if (!c_StoryType === "") {
+        if (c_StoryType === "") {
+            var configs = _.map( oidsArrays, function(oArray) {
+                return {
+                    fetch : ['FormattedID','_UnformattedID','ObjectID','_TypeHierarchy','PlanEstimate', 'ScheduleState', 'c_StoryType', app.kanbanField],
+                    hydrate : ['_TypeHierarchy','ScheduleState',app.kanbanField],
+                    find : {
+                        // '_TypeHierarchy' : { "$in" : ["HierarchicalRequirement","Defect"]} ,
+                        '_TypeHierarchy' : { "$in" : app.getTypes() } ,
+                        '_ProjectHierarchy' : { "$in": [app.getContext().getProject().ObjectID] }, 
+                        'ObjectID' : { "$in" : oArray }
+                    }
+                }
+            })
+        }
+        else {
+            var configs = _.map( oidsArrays, function(oArray) {
+                return {
+                    fetch : ['FormattedID','_UnformattedID','ObjectID','_TypeHierarchy','PlanEstimate', 'ScheduleState', 'c_StoryType', app.kanbanField],
+                    hydrate : ['_TypeHierarchy','ScheduleState',app.kanbanField],
+                    find : {
+                        // '_TypeHierarchy' : { "$in" : ["HierarchicalRequirement","Defect"]} ,
+                        '_TypeHierarchy' : { "$in" : app.getTypes() } ,
+                        '_ProjectHierarchy' : { "$in": [app.getContext().getProject().ObjectID] }, 
+                        'ObjectID' : { "$in" : oArray },                            
                         'c_StoryType' : {"$in" : app.getStoryTypes()}
                     }
                 }
-            }
-        })
+            })
+        }
 
         async.mapSeries( configs, app.readSnapshots, function(err,results) {
 
