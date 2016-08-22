@@ -228,7 +228,7 @@ Ext.define('CustomApp', {
         find["_PreviousValues."+app.kanbanField] =  {"$ne" : null };
         find["_ValidFrom"] = { "$gte" : app.startDate };
 
-        if (!c_StoryType === "") {
+        if (!app.storyType === "") {
             find["c_StoryType"] = { "$in" : app.getStoryTypes() };
         }
 
@@ -475,7 +475,7 @@ Ext.define('CustomApp', {
         }
         console.log("oidsArrays",oidsArrays);
 
-        if (c_StoryType === "") {
+        if (app.storyType === "") {
             var configs = _.map( oidsArrays, function(oArray) {
                 return {
                     fetch : ['FormattedID','_UnformattedID','ObjectID','_TypeHierarchy','PlanEstimate', 'ScheduleState', 'c_StoryType', app.kanbanField],
