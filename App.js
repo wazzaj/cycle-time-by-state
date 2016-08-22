@@ -17,8 +17,7 @@ Ext.define('CustomApp', {
         this.startDate = moment().subtract('month',app.getSetting("months")).toISOString();
 
         if ((app.getSetting("stateField") === "") &&
-            (app.getSetting("finalValue") === "") &&
-            (app.getSetting("storyType") === "")) {
+            (app.getSetting("finalValue") === "")) {
             this.createUI();
         } else {
             app.type = app.getSetting("type");
@@ -228,7 +227,10 @@ Ext.define('CustomApp', {
         find[app.kanbanField] =  app.finalValue;
         find["_PreviousValues."+app.kanbanField] =  {"$ne" : null };
         find["_ValidFrom"] = { "$gte" : app.startDate };
-        find["c_StoryType"] = { "$in" : app.getStoryTypes() };
+
+        if (!c_StoryType === "") {
+            find["c_StoryType"] = { "$in" : app.getStoryTypes() };
+        }
 
         var storeConfig = {
             find : find,
@@ -263,7 +265,6 @@ Ext.define('CustomApp', {
             s.set("CompletedDate",ci.get("_ValidFrom"));
             s.set("Month",month);
             s.set("Size",ci.get("PlanEstimate"));
-//            s.set("Type",ci.get("c_StoryType"));  // Warren 
         });
 
         callback( null, completedItems, snapshots );
@@ -483,7 +484,9 @@ Ext.define('CustomApp', {
                     '_TypeHierarchy' : { "$in" : app.getTypes() } ,
                     '_ProjectHierarchy' : { "$in": [app.getContext().getProject().ObjectID] }, 
                     'ObjectID' : { "$in" : oArray },
-                    'c_StoryType' : {"$in" : app.getStoryTypes()}
+                    if (!c_StoryType === "") {
+                        'c_StoryType' : {"$in" : app.getStoryTypes()}
+                    }
                 }
             }
         })
