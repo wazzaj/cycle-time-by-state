@@ -482,7 +482,8 @@ Ext.define('CustomApp', {
                     // '_TypeHierarchy' : { "$in" : ["HierarchicalRequirement","Defect"]} ,
                     '_TypeHierarchy' : { "$in" : app.getTypes() } ,
                     '_ProjectHierarchy' : { "$in": [app.getContext().getProject().ObjectID] }, 
-                    'ObjectID' : { "$in" : oArray }
+                    'ObjectID' : { "$in" : oArray },
+                    'c_StoryType' : {"$in" : app.getStoryTypes()}
                 }
             }
         })
