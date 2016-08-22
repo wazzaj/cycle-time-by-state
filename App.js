@@ -401,7 +401,7 @@ Ext.define('CustomApp', {
                 aggregators : { cycleTime : cycleTime },
                 rows: [app.kanbanField],
                 cols: ["Team"],
-                hiddenAttributes : ["PlanEstimate", "ObjectID","_TypeHierarchy","_UnformattedID","_ValidFrom","_ValidTo","Project","CompletedDate","c_StoryType"]
+                hiddenAttributes : ["PlanEstimate", "ObjectID","_TypeHierarchy","_UnformattedID","_ValidFrom","_ValidTo","Project","CompletedDate"]
             }
         );
         
